@@ -1,11 +1,19 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const leftDrawerOpen = ref(false)
+const logoExists = ref(false)
 
 function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value
 }
+
+onMounted(() => {
+  // Check if logo.png exists
+  const img = new Image()
+  img.onload = () => { logoExists.value = true }
+  img.src = '/logo.png'
+})
 </script>
 
 <template>
@@ -17,17 +25,23 @@ function toggleLeftDrawer() {
 
                 <q-toolbar-title>
                     <q-avatar>
-                        <img src="../assets/icon.jpeg">
+                        <img v-if="logoExists" src="/logo.png" alt="Logo">
+                        <q-icon v-else name="mdi-trophy-variant" size="md" />
                     </q-avatar>
-                    Title
+                    <div>
+                      <div class="text-h6">La Voz de Todos — Marcador</div>
+                      <div class="text-subtitle2">Temporada 1 · Semifinales Regionales</div>
+                    </div>
                 </q-toolbar-title>
             </q-toolbar>
         </q-header>
 
         <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered>
             <div class="buttons">
-                <q-btn to="/home" label="Home"></q-btn>
-                <q-btn to="/home/dashboard" label="Dashboard"></q-btn>
+                <q-btn to="/" label="Home" flat></q-btn>
+                <q-btn to="/semifinal-caribe" label="Semifinal Caribe" flat></q-btn>
+                <q-btn to="/semifinal-andina" label="Semifinal Andina" flat></q-btn>
+                <q-btn to="/final" label="Final" flat></q-btn>
             </div>
         </q-drawer>
 
