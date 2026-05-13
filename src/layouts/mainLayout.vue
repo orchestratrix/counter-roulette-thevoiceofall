@@ -1,3 +1,33 @@
+<script setup>
+import { ref, computed } from 'vue'
+import { useParticipantsStore } from '../store/participants'
+
+const store = useParticipantsStore()
+const leftDrawerOpen = ref(false)
+const showResetDialog = ref(false)
+
+const hasAnyScores = computed(() =>
+  store.participants.some(p =>
+    p.scores.correctAnswers > 0 ||
+    p.scores.wrongAnswers > 0 ||
+    p.scores.oralRating !== null
+  ) || store.championId !== null || store.finalistCaribeId !== null || store.finalistAndinaId !== null
+)
+
+function toggleLeftDrawer() {
+  leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
+function confirmReset() {
+  showResetDialog.value = true
+}
+
+function resetAll() {
+  store.resetScores()
+  showResetDialog.value = false
+}
+</script>
+
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header elevated class="app-header">
@@ -18,24 +48,13 @@
           </div>
         </q-toolbar-title>
 
-        <q-btn
-          flat dense round
-          icon="mdi-restart"
-          @click="confirmReset"
-          v-if="hasAnyScores"
-        >
+        <q-btn v-if="hasAnyScores" flat dense round icon="mdi-restart" @click="confirmReset">
           <q-tooltip>Reiniciar todo el torneo</q-tooltip>
         </q-btn>
       </q-toolbar>
     </q-header>
 
-    <q-drawer
-      v-model="leftDrawerOpen"
-      side="left"
-      behavior="mobile"
-      bordered
-      class="app-drawer"
-    >
+    <q-drawer v-model="leftDrawerOpen" side="left" behavior="mobile" bordered class="app-drawer">
       <div class="drawer-header">
         <div class="drawer-title">Navegación</div>
       </div>
@@ -88,92 +107,63 @@
         </q-card-section>
         <q-card-actions align="right">
           <q-btn flat label="Cancelar" color="primary" v-close-popup />
-          <q-btn
-            unelevated label="Reiniciar todo"
-            color="negative"
-            @click="resetAll"
-          />
+          <q-btn unelevated label="Reiniciar todo" color="negative" @click="resetAll" />
         </q-card-actions>
       </q-card>
     </q-dialog>
   </q-layout>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue'
-import { useParticipantsStore } from '../store/participants'
-
-const leftDrawerOpen = ref(false)
-const showResetDialog = ref(false)
-const store = useParticipantsStore()
-
-const toggleLeftDrawer = () => {
-  leftDrawerOpen.value = !leftDrawerOpen.value
+<style scoped>
+.app-header {
+  background: linear-gradient(135deg, #0A1F4D 0%, #0749BF 100%) !important;
 }
 
-const hasAnyScores = computed(() =>
-  store.participants.some(p =>
-    p.scores.correctAnswers > 0 ||
-    p.scores.wrongAnswers > 0 ||
-    p.scores.oralRating !== null
-  ) || store.championId !== null
-)
-
-const confirmReset = () => {
-  showResetDialog.value = true
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-const resetAll = () => {
-  store.resetScores()
-  showResetDialog.value = false
+.brand-avatar {
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
-</script>
 
-<style lang="sass" scoped>
-@import '../quasar-variables.sass'
+.brand-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.3px;
+}
 
-.app-header
-  background: linear-gradient(135deg, $dark 0%, $primary 100%) !important
+.brand-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.85;
+  font-weight: 500;
+  margin-top: 2px;
+}
 
-  .brand
-    display: flex
-    align-items: center
-    gap: 12px
+.app-drawer {
+  background-color: #050E2A;
+}
 
-    .brand-avatar
-      border: 2px solid rgba(255,255,255,0.3)
+.drawer-header {
+  padding: 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-    .brand-text
-      .brand-title
-        font-size: 1.05rem
-        font-weight: 800
-        line-height: 1.1
-        letter-spacing: 0.3px
+.drawer-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+}
 
-      .brand-subtitle
-        font-size: 0.75rem
-        opacity: 0.85
-        font-weight: 500
-        margin-top: 2px
-
-.app-drawer
-  background-color: $dark-page
-
-  .drawer-header
-    padding: 20px 16px
-    border-bottom: 1px solid rgba(255,255,255,0.1)
-
-    .drawer-title
-      font-size: 0.8rem
-      text-transform: uppercase
-      letter-spacing: 2px
-      color: rgba(255,255,255,0.5)
-      font-weight: 700
-
-.layout-bg
-  padding: 0
-  background: linear-gradient(180deg, $dark-page 0%, #020816 100%)
-  color: white
-  min-height: 100vh
-
+.layout-bg {
+  padding: 0;
+  background: linear-gradient(180deg, #0749BF 0%, #020816 100%);
+  color: white;
+  min-height: 100vh;
+}
 </style>
