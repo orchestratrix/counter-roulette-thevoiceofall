@@ -9,17 +9,17 @@
   >
     <div class="card-content">
       <div class="top-section">
-        <div class="age-number">{{ participant.age }}</div>
+        <div class="card-number">{{ participant.id }}</div>
         <div class="flag">🇨🇴</div>
       </div>
       
       <div class="photo-section">
-        <img :src="participant.avatar" :alt="`${participant.name} ${participant.lastName}`" />
+        <img :src="participant.photo" :alt="participant.name" />
       </div>
       
       <div class="info-section">
-        <div class="name">{{ participant.name }} {{ participant.lastName }}</div>
-        <div class="details">{{ participant.age }} años · {{ participant.city }}</div>
+        <div class="name">{{ participant.name }}</div>
+        <div class="details">{{ participant.age }} años · {{ participant.institution }}</div>
       </div>
       
       <div class="footer-section">
@@ -33,23 +33,23 @@
           </transition>
         </div>
         <div class="sub-scores">
-          <span class="correct">✓ {{ participant.correctAnswers }}</span>
-          <span class="wrong">✗ {{ participant.wrongAnswers }}</span>
-          <span class="oral" v-if="participant.oralRating">
-            ⭐ {{ participant.oralRating }}
+          <span class="correct">✓ {{ participant.scores.correctAnswers }}</span>
+          <span class="wrong">✗ {{ participant.scores.wrongAnswers }}</span>
+          <span class="oral" v-if="participant.scores.oralRating">
+            ⭐ {{ participant.scores.oralRating }}
           </span>
         </div>
       </div>
     </div>
     
     <div class="controls-section" v-if="showControls">
-      <ParticipantControls :participant-id="participantId" />
+      <ParticipantControls :participant-id="participantId" /> 
     </div>
   </div>
 </template>
 
 <script>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onUnmounted } from 'vue'
 import { useParticipantsStore } from '../store/participants'
 import ParticipantControls from './ParticipantControls.vue'
 import { useAnimatedNumber } from '../composables/useAnimatedNumber'
@@ -79,45 +79,36 @@ export default {
     const totalPoints = computed(() => store.totalPoints(props.participantId))
     const animatedTotalPoints = useAnimatedNumber(totalPoints)
     
-    // Animation handlers
     const triggerPulseGreen = () => {
       pulseGreen.value = true
-      setTimeout(() => {
-        pulseGreen.value = false
-      }, 300)
+      setTimeout(() => { pulseGreen.value = false }, 300)
     }
     
     const triggerShakeRed = () => {
       shakeRed.value = true
-      setTimeout(() => {
-        shakeRed.value = false
-      }, 400)
+      setTimeout(() => { shakeRed.value = false }, 400)
     }
     
-    // Watch for changes to trigger animations
-    const previousCorrect = ref(participant.value?.correctAnswers || 0)
-    const previousWrong = ref(participant.value?.wrongAnswers || 0)
+    const previousCorrect = ref(participant.value?.scores?.correctAnswers || 0)
+    const previousWrong = ref(participant.value?.scores?.wrongAnswers || 0)
     
-    const unwatchCorrect = store.$subscribe((mutation, state) => {
-      const currentParticipant = state.participants.find(p => p.id === props.participantId)
-      if (currentParticipant && currentParticipant.correctAnswers > previousCorrect.value) {
+    const unsubscribe = store.$subscribe((mutation, state) => {
+      const current = state.participants.find(p => p.id === props.participantId)
+      if (!current) return
+      
+      if (current.scores.correctAnswers > previousCorrect.value) {
         triggerPulseGreen()
       }
-      previousCorrect.value = currentParticipant?.correctAnswers || 0
-    })
-    
-    const unwatchWrong = store.$subscribe((mutation, state) => {
-      const currentParticipant = state.participants.find(p => p.id === props.participantId)
-      if (currentParticipant && currentParticipant.wrongAnswers > previousWrong.value) {
+      if (current.scores.wrongAnswers > previousWrong.value) {
         triggerShakeRed()
       }
-      previousWrong.value = currentParticipant?.wrongAnswers || 0
+      
+      previousCorrect.value = current.scores.correctAnswers
+      previousWrong.value = current.scores.wrongAnswers
     })
     
-    // Clean up watchers
     onUnmounted(() => {
-      unwatchCorrect()
-      unwatchWrong()
+      unsubscribe()
     })
     
     return {
@@ -161,15 +152,17 @@ export default {
   .top-section
     display: flex
     justify-content: space-between
+    align-items: center
     padding: 12px
     
-    .age-number
+    .card-number
       font-size: 3rem
       font-weight: bold
-      color: rgba(0, 0, 0, 0.1)
+      color: rgba(10, 31, 77, 0.25)
+      line-height: 1
       
     .flag
-      font-size: 1.5rem
+      font-size: 1.8rem
   
   .photo-section
     display: flex
@@ -178,61 +171,71 @@ export default {
     
     img
       width: 100%
-      max-width: 200px
-      height: 250px
+      max-width: 220px
+      height: 260px
       object-fit: cover
       border-radius: 4px
+      background-color: rgba(10, 31, 77, 0.1)
   
   .info-section
     background-color: $dark
     color: white
     padding: 12px
     text-align: center
+    margin-top: 8px
     
     .name
       font-weight: bold
       text-transform: uppercase
       margin-bottom: 4px
+      font-size: 1rem
     
     .details
-      font-size: 0.9rem
-      opacity: 0.8
+      font-size: 0.8rem
+      opacity: 0.85
+      line-height: 1.3
   
   .footer-section
     padding: 8px 12px
     text-align: center
     font-size: 0.8rem
-    color: rgba(0, 0, 0, 0.6)
+    color: rgba(10, 31, 77, 0.7)
+    font-weight: 500
   
   .score-section
     padding: 12px
     text-align: center
+    border-top: 1px solid rgba(10, 31, 77, 0.15)
     
     .total-score
       .score-number
-        font-size: 2.5rem
+        font-size: 2.8rem
         font-weight: bold
         color: $primary
+        line-height: 1
     
     .sub-scores
       display: flex
       justify-content: center
-      gap: 12px
-      margin-top: 8px
-      font-size: 0.9rem
+      gap: 14px
+      margin-top: 10px
+      font-size: 0.95rem
+      font-weight: 600
       
       .correct
-        color: green
+        color: $positive
       
       .wrong
-        color: red
+        color: $negative
       
       .oral
-        color: #FFD700
+        color: $secondary
   
   .controls-section
-    width: 80px
-    border-left: 1px solid rgba(0, 0, 0, 0.1)
+    width: 90px
+    border-left: 1px solid rgba(10, 31, 77, 0.15)
+    display: flex
+    align-items: center
 
 @keyframes pulseGreen
   0%
@@ -250,7 +253,6 @@ export default {
   75%
     transform: translateX(10px)
 
-// Transitions
 .score-enter-active, .score-leave-active
   transition: all 0.5s ease
 

@@ -1,87 +1,107 @@
 import { defineStore } from 'pinia'
-import piniaPLuginPersistedstate from 'pinia-plugin-persistedstate'
 
-// Datos de los participantes
-const participantsData = [
-  { id: 'caribe-01', region: 'caribe', name: 'Ana Sofía', lastName: 'Pérez', age: 24, city: 'Cartagena', avatar: 'public/officials/caribe-01.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'caribe-02', region: 'caribe', name: 'Carlos', lastName: 'Gómez', age: 27, city: 'Barranquilla', avatar: 'public/officials/caribe-02.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'caribe-03', region: 'caribe', name: 'Valentina', lastName: 'Rodríguez', age: 22, city: 'Santa Marta', avatar: 'public/officials/caribe-03.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'caribe-04', region: 'caribe', name: 'Mateo', lastName: 'Jiménez', age: 26, city: 'Montería', avatar: 'public/officials/caribe-04.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'andina-01', region: 'andina', name: 'Mariana', lastName: 'López', age: 25, city: 'Bogotá', avatar: 'public/officials/andina-01.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'andina-02', region: 'andina', name: 'Juan David', lastName: 'Ramírez', age: 28, city: 'Medellín', avatar: 'public/officials/andina-02.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'andina-03', region: 'andina', name: 'Isabella', lastName: 'García', age: 23, city: 'Cali', avatar: 'public/officials/andina-03.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null },
-  { id: 'andina-04', region: 'andina', name: 'Sebastián', lastName: 'Martínez', age: 29, city: 'Manizales', avatar: 'public/officials/andina-04.jpg', correctAnswers: 0, wrongAnswers: 0, oralRating: null }
+export const participantsData = [
+  // CARIBE
+  { id: '01', region: 'Caribe', name: 'Gabriangeli Marrero', 
+    photo: '/officials/barranquilla.png', age: 19, 
+    institution: 'I.E.D MARCO FIDEL SUÁREZ', city: 'Barranquilla',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '02', region: 'Caribe', name: 'Giselle Paola Jiménez', 
+    photo: '/officials/santamarta.png', age: 19, 
+    institution: 'C.E DIVINA ENSEÑANZA', city: 'Santa Marta',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '03', region: 'Caribe', name: 'Manuel Cantillo', 
+    photo: '/officials/orihueca.png', age: 19, 
+    institution: 'I.E.R RODRIGO VIVES DE ANDREIS - COLEGIO RURAL', 
+    city: 'Orihueca',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '04', region: 'Caribe', name: 'Ana Victoria Garizao', 
+    photo: '/officials/laspiedras.png', age: 19, 
+    institution: 'I.E.T.A LAS PIEDRAS - COLEGIO NEGRITUDES', 
+    city: 'Las Piedras',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  // ANDINA
+  { id: '05', region: 'Andina', name: 'Alexandra Ariza Puentes', 
+    photo: '/officials/nuestrasrasalud.png', age: 19, 
+    institution: 'NUESTRA SEÑORA DE LA SALUD', city: 'Supatá',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '06', region: 'Andina', name: 'David Gerónimo Peñuela Pinzón', 
+    photo: '/officials/militar.png', age: 18, 
+    institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '07', region: 'Andina', name: 'Martina Santos', 
+    photo: '/officials/jaime.png', age: 17, 
+    institution: 'JAIME NIÑO DIEZ', city: 'Bogotá',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } },
+  { id: '08', region: 'Andina', name: 'Leydi López', 
+    photo: '/officials/jhon.png', age: 16, 
+    institution: 'JOHN F KENNEDY', city: 'Bogotá',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null } }
 ]
 
 export const useParticipantsStore = defineStore('participants', {
   state: () => ({
     participants: participantsData
   }),
-  
+
   getters: {
     byRegion: (state) => (region) => {
-      return state.participants.filter(participant => participant.region === region)
+      return state.participants.filter(p => p.region.toLowerCase() === region.toLowerCase())
     },
-    
+
     byId: (state) => (id) => {
-      return state.participants.find(participant => participant.id === id)
+      return state.participants.find(p => p.id === id)
     },
-    
+
     totalPoints: (state) => (id) => {
-      const participant = state.byId(id)
-      if (!participant) return 0
-      return participant.correctAnswers + (participant.oralRating ?? 0)
+      const p = state.participants.find(x => x.id === id)
+      if (!p) return 0
+      return p.scores.correctAnswers + (p.scores.oralRating ?? 0)
     }
   },
-  
+
   actions: {
-    // Actions preparadas para Issue #2 (stubs)
     addCorrect(id) {
-      const participant = this.byId(id)
-      if (participant) participant.correctAnswers++
+      const p = this.participants.find(x => x.id === id)
+      if (p) p.scores.correctAnswers++
     },
-    
     addWrong(id) {
-      const participant = this.byId(id)
-      if (participant) participant.wrongAnswers++
+      const p = this.participants.find(x => x.id === id)
+      if (p) p.scores.wrongAnswers++
     },
-    
     removeCorrect(id) {
-      const participant = this.byId(id)
-      if (participant) participant.correctAnswers = Math.max(0, participant.correctAnswers - 1)
+      const p = this.participants.find(x => x.id === id)
+      if (p) p.scores.correctAnswers = Math.max(0, p.scores.correctAnswers - 1)
     },
-    
     removeWrong(id) {
-      const participant = this.byId(id)
-      if (participant) participant.wrongAnswers = Math.max(0, participant.wrongAnswers - 1)
+      const p = this.participants.find(x => x.id === id)
+      if (p) p.scores.wrongAnswers = Math.max(0, p.scores.wrongAnswers - 1)
     },
-    
     setOralRating(id, rating) {
-      const participant = this.byId(id)
-      if (participant && rating >= 1 && rating <= 5) {
-        participant.oralRating = Math.floor(rating)
-      } else if (participant) {
-        participant.oralRating = null
+      const p = this.participants.find(x => x.id === id)
+      if (!p) return
+      if (rating >= 1 && rating <= 5) {
+        p.scores.oralRating = Math.floor(rating)
+      } else {
+        p.scores.oralRating = null
       }
     },
-    
     resetScores() {
-      this.participants.forEach(participant => {
-        participant.correctAnswers = 0
-        participant.wrongAnswers = 0
-        participant.oralRating = null
+      this.participants.forEach(p => {
+        p.scores.correctAnswers = 0
+        p.scores.wrongAnswers = 0
+        p.scores.oralRating = null
       })
     },
-    
     resetParticipant(id) {
-      const participant = this.byId(id)
-      if (participant) {
-        participant.correctAnswers = 0
-        participant.wrongAnswers = 0
-        participant.oralRating = null
+      const p = this.participants.find(x => x.id === id)
+      if (p) {
+        p.scores.correctAnswers = 0
+        p.scores.wrongAnswers = 0
+        p.scores.oralRating = null
       }
     }
   },
-  
+
   persist: true
 })

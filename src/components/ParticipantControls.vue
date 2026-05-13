@@ -2,18 +2,16 @@
   <div class="participant-controls">
     <div class="control-group">
       <q-btn 
-        dense 
-        round 
-        color="green" 
-        icon="mdi-check-circle" 
+        dense round
+        color="positive"
+        icon="mdi-check-circle"
         @click="addCorrect"
         class="control-btn"
       />
       <q-btn 
-        dense 
-        round 
-        color="red" 
-        icon="mdi-close-circle" 
+        dense round
+        color="negative"
+        icon="mdi-close-circle"
         @click="addWrong"
         class="control-btn"
       />
@@ -21,20 +19,18 @@
     
     <div class="control-group">
       <q-btn 
-        dense 
-        round 
-        flat 
-        color="grey" 
-        icon="mdi-minus-circle" 
+        dense round flat
+        color="grey-7"
+        icon="mdi-minus"
+        size="sm"
         @click="removeCorrect"
         class="control-btn small"
       />
       <q-btn 
-        dense 
-        round 
-        flat 
-        color="grey" 
-        icon="mdi-minus-circle" 
+        dense round flat
+        color="grey-7"
+        icon="mdi-minus"
+        size="sm"
         @click="removeWrong"
         class="control-btn small"
       />
@@ -44,23 +40,20 @@
       <q-rating
         v-model="localOralRating"
         :max="5"
-        size="1.5em"
-        color="yellow"
-        icon="star"
-        :icon-selected="['star', 'star', 'star', 'star', 'star']"
-        no-dimming
+        size="1.2em"
+        color="yellow-7"
+        icon="star_border"
+        icon-selected="star"
       />
     </div>
     
     <div class="reset-control">
       <q-btn 
-        dense 
-        round 
-        flat 
-        color="grey" 
-        icon="mdi-restart" 
+        dense round flat
+        color="grey-7"
+        icon="mdi-restart"
+        size="sm"
         @click="confirmReset"
-        class="control-btn"
       />
     </div>
     
@@ -68,9 +61,8 @@
       <q-card>
         <q-card-section>
           <div class="text-h6">Confirmar reinicio</div>
-          <div class="text-body1">¿Estás seguro de que deseas reiniciar los puntajes de este participante?</div>
+          <div class="text-body1">¿Reiniciar puntajes de este participante?</div>
         </q-card-section>
-        
         <q-card-actions align="right">
           <q-btn flat label="Cancelar" color="primary" v-close-popup />
           <q-btn flat label="Reiniciar" color="negative" @click="resetParticipant" />
@@ -95,40 +87,26 @@ export default {
   setup(props) {
     const store = useParticipantsStore()
     const showResetDialog = ref(false)
-    const localOralRating = ref(store.byId(props.participantId)?.oralRating || null)
     
-    // Watch for changes in the store and update local rating
+    // FIX: lee de scores.oralRating, no de oralRating plano
+    const localOralRating = ref(store.byId(props.participantId)?.scores?.oralRating || 0)
+    
+    // FIX: watch sobre scores.oralRating
     watch(
-      () => store.byId(props.participantId)?.oralRating,
+      () => store.byId(props.participantId)?.scores?.oralRating,
       (newRating) => {
-        localOralRating.value = newRating
+        localOralRating.value = newRating || 0
       }
     )
     
-    const addCorrect = () => {
-      store.addCorrect(props.participantId)
-    }
-    
-    const addWrong = () => {
-      store.addWrong(props.participantId)
-    }
-    
-    const removeCorrect = () => {
-      store.removeCorrect(props.participantId)
-    }
-    
-    const removeWrong = () => {
-      store.removeWrong(props.participantId)
-    }
-    
-    const setOralRating = (rating) => {
-      store.setOralRating(props.participantId, rating)
-    }
-    
-    // Watch local rating changes and update store
     watch(localOralRating, (newRating) => {
-      setOralRating(newRating)
+      store.setOralRating(props.participantId, newRating)
     })
+    
+    const addCorrect = () => store.addCorrect(props.participantId)
+    const addWrong = () => store.addWrong(props.participantId)
+    const removeCorrect = () => store.removeCorrect(props.participantId)
+    const removeWrong = () => store.removeWrong(props.participantId)
     
     const confirmReset = () => {
       showResetDialog.value = true
@@ -159,21 +137,22 @@ export default {
   flex-direction: column
   gap: 8px
   padding: 8px
-  
+  align-items: center
+
 .control-group
   display: flex
   gap: 4px
   justify-content: center
-  
+
 .control-btn
   &.small
-    transform: scale(0.8)
-    
+    transform: scale(0.85)
+
 .rating-control
   display: flex
   justify-content: center
   padding: 4px 0
-  
+
 .reset-control
   display: flex
   justify-content: center

@@ -2,22 +2,12 @@
   <div class="semifinal-container">
     <div class="header">
       <h1>Semifinal Regional — {{ region }}</h1>
-      <q-btn 
-        label="Volver al inicio" 
-        color="primary" 
-        @click="goHome"
-        class="back-button"
-      />
+      <q-btn label="Volver al inicio" color="primary" @click="goHome" class="back-button" />
     </div>
-    
+
     <div class="participants-grid">
-      <ParticipantCard 
-        v-for="participant in participants" 
-        :key="participant.id"
-        :participant-id="participant.id"
-        :show-controls="true"
-        class="participant-card-item"
-      />
+      <ParticipantCard v-for="participant in participants" :key="participant.id" :participant-id="participant.id"
+        :show-controls="true" class="participant-card-item" />
     </div>
   </div>
 </template>
@@ -42,13 +32,13 @@ export default {
   setup(props) {
     const store = useParticipantsStore()
     const router = useRouter()
-    
+
     const participants = computed(() => store.byRegion(props.region))
     
     const goHome = () => {
       router.push('/')
     }
-    
+
     return {
       participants,
       goHome

@@ -8,12 +8,6 @@ function toggleLeftDrawer() {
     leftDrawerOpen.value = !leftDrawerOpen.value
 }
 
-onMounted(() => {
-  // Check if logo.png exists
-  const img = new Image()
-  img.onload = () => { logoExists.value = true }
-  img.src = '/logo.png'
-})
 </script>
 
 <template>
@@ -25,8 +19,7 @@ onMounted(() => {
 
                 <q-toolbar-title>
                     <q-avatar>
-                        <img v-if="logoExists" src="/logo.png" alt="Logo">
-                        <q-icon v-else name="mdi-trophy-variant" size="md" />
+                        <img src="../assets/icon.jpeg" alt="Logo">
                     </q-avatar>
                     <div>
                       <div class="text-h6">La Voz de Todos — Marcador</div>
