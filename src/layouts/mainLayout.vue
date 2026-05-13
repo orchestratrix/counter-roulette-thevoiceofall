@@ -17,7 +17,7 @@ function toggleLeftDrawer() {
 
                 <q-toolbar-title>
                     <q-avatar>
-                        <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg">
+                        <img src="../assets/icon.jpeg">
                     </q-avatar>
                     Title
                 </q-toolbar-title>
