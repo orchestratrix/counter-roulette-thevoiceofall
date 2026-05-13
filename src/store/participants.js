@@ -48,17 +48,21 @@ export const useParticipantsStore = defineStore('participants', {
     
     removeCorrect(id) {
       const participant = this.byId(id)
-      if (participant && participant.correctAnswers > 0) participant.correctAnswers--
+      if (participant) participant.correctAnswers = Math.max(0, participant.correctAnswers - 1)
     },
     
     removeWrong(id) {
       const participant = this.byId(id)
-      if (participant && participant.wrongAnswers > 0) participant.wrongAnswers--
+      if (participant) participant.wrongAnswers = Math.max(0, participant.wrongAnswers - 1)
     },
     
     setOralRating(id, rating) {
       const participant = this.byId(id)
-      if (participant) participant.oralRating = rating
+      if (participant && rating >= 1 && rating <= 5) {
+        participant.oralRating = Math.floor(rating)
+      } else if (participant) {
+        participant.oralRating = null
+      }
     },
     
     resetScores() {
