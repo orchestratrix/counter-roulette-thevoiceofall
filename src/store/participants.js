@@ -5,20 +5,20 @@ const initialParticipants = [
   // CARIBE
   {
     id: '01', region: 'zona norte', name: 'Gabriangeli Marrero',
-    photo: '/officials/barranquilla.png', age: 19,
+    photo: '/officials/barranquilla.png', age: 17,
     institution: 'I.E.D MARCO FIDEL SUÁREZ', city: 'Barranquilla',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
     id: '02', region: 'zona norte', name: 'Manuel Cantillo',
-    photo: '/officials/orihueca.png', age: 19,
+    photo: '/officials/orihueca.png', age: 17,
     institution: 'I.E.R RODRIGO VIVES DE ANDREIS - COLEGIO RURAL',
     city: 'Orihueca',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
     id: '03', region: 'zona norte', name: 'Giselle Paola Jiménez',
-    photo: '/officials/santamarta.png', age: 19,
+    photo: '/officials/santamarta.png', age: 16,
     institution: 'C.E DIVINA ENSEÑANZA', city: 'Santa Marta',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
