@@ -65,17 +65,17 @@ function resetAll() {
           </q-item-section>
           <q-item-section>Home</q-item-section>
         </q-item>
-        <q-item clickable v-ripple to="/semifinal-caribe">
+        <q-item clickable v-ripple to="/semifinal-norte">
           <q-item-section avatar>
             <q-icon name="mdi-waves" />
           </q-item-section>
-          <q-item-section>Semifinal Caribe</q-item-section>
+          <q-item-section>Semifinal Zona Norte</q-item-section>
         </q-item>
         <q-item clickable v-ripple to="/semifinal-andina">
           <q-item-section avatar>
             <q-icon name="mdi-terrain" />
           </q-item-section>
-          <q-item-section>Semifinal Andina</q-item-section>
+          <q-item-section>Semifinal Zona Andina</q-item-section>
         </q-item>
         <q-item clickable v-ripple to="/final">
           <q-item-section avatar>

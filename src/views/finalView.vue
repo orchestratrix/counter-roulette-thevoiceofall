@@ -72,11 +72,11 @@ function resetChampion() {
       <h2>Finalistas no asignados</h2>
       <p v-if="!finalists[0]">
         Falta asignar finalista de la
-        <strong>Semifinal Caribe</strong>.
+        <strong>Semifinal Zona Norte</strong>.
       </p>
       <p v-if="!finalists[1]">
         Falta asignar finalista de la
-        <strong>Semifinal Andina</strong>.
+        <strong>Semifinal Zona Andina</strong>.
       </p>
       <p class="hint">
         Ve a cada semifinal y usa el botón <strong>"Asignar Finalista"</strong>
@@ -84,7 +84,7 @@ function resetChampion() {
       </p>
       <div class="warning-actions">
         <q-btn v-if="!finalists[0]" unelevated color="primary" no-caps label="Ir a Semifinal Caribe"
-          to="/semifinal-caribe" />
+          to="/semifinal-norte" />
         <q-btn v-if="!finalists[1]" unelevated color="secondary" text-color="dark" no-caps label="Ir a Semifinal Andina"
           to="/semifinal-andina" />
       </div>

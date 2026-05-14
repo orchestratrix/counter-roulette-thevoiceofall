@@ -11,16 +11,16 @@ const routes = [
     children: [
       { path: '', name: 'home', component: homeView },
       {
-        path: 'semifinal-caribe',
-        name: 'semifinal-caribe',
+        path: 'semifinal-norte',
+        name: 'semifinal-norte',
         component: semifinalView,
-        props: { region: 'caribe' }
+        props: { region: 'zona norte' }
       },
       {
         path: 'semifinal-andina',
         name: 'semifinal-andina',
         component: semifinalView,
-        props: { region: 'andina' }
+        props: { region: 'zona andina' }
       },
       { path: 'final', name: 'final', component: finalView }
     ]

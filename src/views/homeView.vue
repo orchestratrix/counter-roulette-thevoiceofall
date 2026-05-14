@@ -24,6 +24,7 @@ const finalSub = computed(() => {
 })
 
 function slug(s) {
+  if (!s) return ''
   return s.replace(/\s+/g, '-')
 }
 </script>
@@ -36,12 +37,12 @@ function slug(s) {
     </div>
 
     <div class="state-strip">
-      <div class="state-card" :class="`state-${slug(state.caribe)}`">
-        <div class="state-label">Caribe</div>
-        <div class="state-value">{{ stateLabel(state.caribe) }}</div>
+      <div class="state-card" :class="`state-${slug(state.norte)}`">
+        <div class="state-label">Zona Norte</div>
+        <div class="state-value">{{ stateLabel(state.norte) }}</div>
       </div>
       <div class="state-card" :class="`state-${slug(state.andina)}`">
-        <div class="state-label">Andina</div>
+        <div class="state-label">Zona Andina</div>
         <div class="state-value">{{ stateLabel(state.andina) }}</div>
       </div>
       <div class="state-card" :class="`state-${slug(state.final)}`">
@@ -51,11 +52,11 @@ function slug(s) {
     </div>
 
     <div class="buttons-container">
-      <q-btn class="region-btn caribe" to="/semifinal-caribe" unelevated no-caps>
+      <q-btn class="region-btn norte" to="/semifinal-norte" unelevated no-caps>
         <div class="btn-content">
           <q-icon name="mdi-waves" size="2.5rem" />
           <div>
-            <div class="btn-title">Semifinal Caribe</div>
+            <div class="btn-title">Zona Norte</div>
             <div class="btn-sub">4 participantes</div>
           </div>
         </div>
@@ -65,7 +66,7 @@ function slug(s) {
         <div class="btn-content">
           <q-icon name="mdi-terrain" size="2.5rem" />
           <div>
-            <div class="btn-title">Semifinal Andina</div>
+            <div class="btn-title">Zona Andina</div>
             <div class="btn-sub">4 participantes</div>
           </div>
         </div>
@@ -201,7 +202,7 @@ function slug(s) {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35);
 }
 
-.region-btn.caribe {
+.region-btn.norte {
   background: linear-gradient(135deg, #0749BF 0%, #4a7fd9 100%) !important;
   color: white !important;
 }

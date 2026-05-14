@@ -4,26 +4,26 @@ import { ref, computed } from 'vue'
 const initialParticipants = [
   // CARIBE
   {
-    id: '01', region: 'caribe', name: 'Gabriangeli Marrero',
+    id: '01', region: 'zona norte', name: 'Gabriangeli Marrero',
     photo: '/officials/barranquilla.png', age: 19,
     institution: 'I.E.D MARCO FIDEL SUÁREZ', city: 'Barranquilla',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '02', region: 'caribe', name: 'Giselle Paola Jiménez',
+    id: '02', region: 'zona norte', name: 'Giselle Paola Jiménez',
     photo: '/officials/santamarta.png', age: 19,
     institution: 'C.E DIVINA ENSEÑANZA', city: 'Santa Marta',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '03', region: 'caribe', name: 'Manuel Cantillo',
+    id: '03', region: 'zona norte', name: 'Manuel Cantillo',
     photo: '/officials/orihueca.png', age: 19,
     institution: 'I.E.R RODRIGO VIVES DE ANDREIS - COLEGIO RURAL',
     city: 'Orihueca',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '04', region: 'caribe', name: 'Ana Victoria Garizao',
+    id: '04', region: 'zona norte', name: 'Ana Victoria Garizao',
     photo: '/officials/laspiedras.png', age: 17,
     institution: 'I.E.T.A LAS PIEDRAS - COLEGIO NEGRITUDES',
     city: 'Las Piedras',
@@ -31,25 +31,25 @@ const initialParticipants = [
   },
   // ANDINA
   {
-    id: '05', region: 'andina', name: 'Alexandra Ariza Puentes',
+    id: '05', region: 'zona andina', name: 'Alexandra Ariza Puentes',
     photo: '/officials/nuestrasrasalud.png', age: 19,
     institution: 'NUESTRA SEÑORA DE LA SALUD', city: 'Supatá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '06', region: 'andina', name: 'David Gerónimo Peñuela Pinzón',
+    id: '06', region: 'zona andina', name: 'David Gerónimo Peñuela Pinzón',
     photo: '/officials/militar.png', age: 18,
     institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '07', region: 'andina', name: 'Martina Santos',
+    id: '07', region: 'zona andina', name: 'Martina Santos',
     photo: '/officials/jaime.png', age: 17,
     institution: 'JAIME NIÑO DIEZ', city: 'Bogotá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '08', region: 'andina', name: 'Leydi López',
+    id: '08', region: 'zona andina', name: 'Leydi López',
     photo: '/officials/jhon.png', age: 16,
     institution: 'JOHN F KENNEDY', city: 'Bogotá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
@@ -59,7 +59,7 @@ const initialParticipants = [
 export const useParticipantsStore = defineStore('participants', () => {
   const participants = ref(JSON.parse(JSON.stringify(initialParticipants)))
   const championId = ref(null)
-  const finalistCaribeId = ref(null)
+  const finalistNorteId = ref(null)
   const finalistAndinaId = ref(null)
 
   // Helpers internos
@@ -90,15 +90,15 @@ export const useParticipantsStore = defineStore('participants', () => {
   }
 
   const finalistByRegion = (region) => {
-    const id = region.toLowerCase() === 'caribe'
-      ? finalistCaribeId.value
+    const id = region.toLowerCase() === 'zona norte'
+      ? finalistNorteId.value
       : finalistAndinaId.value
     return id ? findById(id) : null
   }
 
   const finalists = computed(() => [
-    finalistByRegion('caribe'),
-    finalistByRegion('andina')
+    finalistByRegion('zona norte'),
+    finalistByRegion('zona andina')
   ])
 
   const tournamentState = computed(() => {
@@ -109,19 +109,19 @@ export const useParticipantsStore = defineStore('participants', () => {
         p.scores.oralRating !== null
       )
 
-    const caribeStarted = hasScores('caribe')
-    const andinaStarted = hasScores('andina')
-    const caribeFinalist = !!finalistCaribeId.value
+    const norteStarted = hasScores('zona norte')
+    const andinaStarted = hasScores('zona andina')
+    const norteFinalist = !!finalistNorteId.value
     const andinaFinalist = !!finalistAndinaId.value
 
     return {
-      caribe: caribeFinalist ? 'definida'
-        : caribeStarted ? 'en curso'
+      norte: norteFinalist ? 'definida'
+        : norteStarted ? 'en curso'
           : 'pendiente',
       andina: andinaFinalist ? 'definida'
         : andinaStarted ? 'en curso'
           : 'pendiente',
-      final: (caribeFinalist && andinaFinalist)
+      final: (norteFinalist && andinaFinalist)
         ? (championId.value ? 'coronado' : 'lista')
         : 'pendiente'
     }
@@ -170,7 +170,7 @@ export const useParticipantsStore = defineStore('participants', () => {
       p.scores.oralRating = null
     })
     championId.value = null
-    finalistCaribeId.value = null
+    finalistNorteId.value = null
     finalistAndinaId.value = null
   }
 
@@ -181,13 +181,13 @@ export const useParticipantsStore = defineStore('participants', () => {
 
     resetParticipantScores(id)
 
-    if (p.region === 'caribe') finalistCaribeId.value = id
-    else if (p.region === 'andina') finalistAndinaId.value = id
+    if (p.region === 'zona norte') finalistNorteId.value = id
+    else if (p.region === 'zona andina') finalistAndinaId.value = id
   }
 
   function clearFinalist(region) {
-    if (region.toLowerCase() === 'caribe') finalistCaribeId.value = null
-    else if (region.toLowerCase() === 'andina') finalistAndinaId.value = null
+    if (region.toLowerCase() === 'zona norte') finalistCaribeId.value = null
+    else if (region.toLowerCase() === 'zona andina') finalistAndinaId.value = null
     championId.value = null
   }
 
@@ -203,7 +203,7 @@ export const useParticipantsStore = defineStore('participants', () => {
     // state
     participants,
     championId,
-    finalistCaribeId,
+    finalistNorteId,
     finalistAndinaId,
     // getters
     byRegion,
