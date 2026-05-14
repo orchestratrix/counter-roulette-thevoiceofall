@@ -123,6 +123,8 @@
                 </span>
             </button>
         </div>
+        <audio ref="spinAudio" src="/sounds/spin.mp3" preload="auto" />
+        <audio ref="dingAudio" src="/sounds/ding.mp3" preload="auto" />
     </div>
 </template>
 
@@ -151,6 +153,8 @@ const TEXT_ON_DARK = '#FFFFFF'
 const rotation = ref(0)
 const isSpinning = ref(false)
 const targetQuestion = ref(null)
+const spinAudio = ref(null)
+const dingAudio = ref(null)
 
 // Bombillos en el borde dorado (decorativos, no rotan con la rueda)
 const bulbs = computed(() => {
@@ -286,11 +290,29 @@ function spin() {
 
     isSpinning.value = true
     rotation.value = finalRotation
+
+    if (spinAudio.value) {
+        spinAudio.value.currentTime = 0
+        spinAudio.value.volume = 0.7
+        spinAudio.value.play().catch(() => { /* autoplay bloqueado */ })
+    }
 }
 
 function onSpinEnd() {
     if (!isSpinning.value) return
     isSpinning.value = false
+
+    if (spinAudio.value) {
+        spinAudio.value.pause()
+        spinAudio.value.currentTime = 0
+    }
+
+    if (dingAudio.value) {
+        dingAudio.value.currentTime = 0
+        dingAudio.value.volume = 0.85
+        dingAudio.value.play().catch(() => { /* autoplay bloqueado */ })
+    }
+
     emit('spin-end', targetQuestion.value)
 }
 
