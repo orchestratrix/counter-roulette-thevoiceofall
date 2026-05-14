@@ -32,25 +32,25 @@ const initialParticipants = [
   // ANDINA
   {
     id: '05', region: 'zona andina', name: 'Alexandra Ariza Puentes',
-    photo: '/officials/nuestrasrasalud.png', age: 19,
+    photo: '/officials/nuestrasrasalud.png', age: 15,
     institution: 'NUESTRA SEÑORA DE LA SALUD', city: 'Supatá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
     id: '06', region: 'zona andina', name: 'Martina Santos',
-    photo: '/officials/jaime.png', age: 17,
+    photo: '/officials/jaime.png', age: 16,
     institution: 'JAIME NIÑO DIEZ', city: 'Bogotá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
     id: '07', region: 'zona andina', name: 'David Gerónimo Peñuela Pinzón',
-    photo: '/officials/militar.png', age: 18,
+    photo: '/officials/militar.png', age: 16,
     institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
     id: '08', region: 'zona andina', name: 'Leydi López',
-    photo: '/officials/jhon.png', age: 16,
+    photo: '/officials/jhon.png', age: 18,
     institution: 'JOHN F KENNEDY', city: 'Bogotá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   }
