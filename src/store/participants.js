@@ -45,7 +45,7 @@ const initialParticipants = [
   {
     id: '07', region: 'zona andina', name: 'David Gerónimo Peñuela Pinzón',
     photo: '/officials/militar.png', age: 16,
-    institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
+    institution: 'COLEGIO MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
