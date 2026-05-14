@@ -10,16 +10,16 @@ const initialParticipants = [
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '02', region: 'zona norte', name: 'Giselle Paola Jiménez',
-    photo: '/officials/santamarta.png', age: 19,
-    institution: 'C.E DIVINA ENSEÑANZA', city: 'Santa Marta',
-    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
-  },
-  {
-    id: '03', region: 'zona norte', name: 'Manuel Cantillo',
+    id: '02', region: 'zona norte', name: 'Manuel Cantillo',
     photo: '/officials/orihueca.png', age: 19,
     institution: 'I.E.R RODRIGO VIVES DE ANDREIS - COLEGIO RURAL',
     city: 'Orihueca',
+    scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
+  },
+  {
+    id: '03', region: 'zona norte', name: 'Giselle Paola Jiménez',
+    photo: '/officials/santamarta.png', age: 19,
+    institution: 'C.E DIVINA ENSEÑANZA', city: 'Santa Marta',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
@@ -37,15 +37,15 @@ const initialParticipants = [
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '06', region: 'zona andina', name: 'David Gerónimo Peñuela Pinzón',
-    photo: '/officials/militar.png', age: 18,
-    institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
+    id: '06', region: 'zona andina', name: 'Martina Santos',
+    photo: '/officials/jaime.png', age: 17,
+    institution: 'JAIME NIÑO DIEZ', city: 'Bogotá',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {
-    id: '07', region: 'zona andina', name: 'Martina Santos',
-    photo: '/officials/jaime.png', age: 17,
-    institution: 'JAIME NIÑO DIEZ', city: 'Bogotá',
+    id: '07', region: 'zona andina', name: 'David Gerónimo Peñuela Pinzón',
+    photo: '/officials/militar.png', age: 18,
+    institution: 'MILITAR LICEO SOCIAL COMPARTIR', city: 'Sasaima',
     scores: { correctAnswers: 0, wrongAnswers: 0, oralRating: null }
   },
   {

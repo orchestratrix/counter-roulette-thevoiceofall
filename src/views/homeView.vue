@@ -81,6 +81,15 @@ function slug(s) {
           </div>
         </div>
       </q-btn>
+
+      <q-btn class="region-btn roulette" to="/roulette" unelevated no-caps>
+        <div class="btn-content">
+          <q-icon name="mdi-poker-chip" size="2.5rem" />
+          <div>
+            <div class="btn-title">Ruleta</div>
+          </div>
+        </div>
+      </q-btn>
     </div>
 
     <div class="footer-note">
@@ -217,11 +226,18 @@ function slug(s) {
   color: white !important;
 }
 
+.region-btn.roulette {
+  background: linear-gradient(135deg, #0749BF 0%, #4a7fd9 100%) !important;
+  color: white !important;
+}
+
 .btn-content {
   display: flex;
   align-items: center;
+  justify-content: center;
+  align-content: center;
   gap: 16px;
-  padding: 0 20px;
+  padding: 0 10px;
 }
 
 .btn-title {

@@ -83,6 +83,12 @@ function resetAll() {
           </q-item-section>
           <q-item-section>Gran Final</q-item-section>
         </q-item>
+        <q-item clickable v-ripple to="/roulette">
+          <q-item-section avatar>
+            <q-icon name="mdi-poker-chip" />
+          </q-item-section>
+          <q-item-section>Ruleta</q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
 
