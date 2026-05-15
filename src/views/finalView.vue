@@ -83,9 +83,9 @@ function resetChampion() {
         para confirmar quién pasa.
       </p>
       <div class="warning-actions">
-        <q-btn v-if="!finalists[0]" unelevated color="primary" no-caps label="Ir a Semifinal Caribe"
+        <q-btn v-if="!finalists[0]" unelevated color="primary" no-caps label="Ir a Semifinal Zona Norte"
           to="/semifinal-norte" />
-        <q-btn v-if="!finalists[1]" unelevated color="secondary" text-color="dark" no-caps label="Ir a Semifinal Andina"
+        <q-btn v-if="!finalists[1]" unelevated color="secondary" text-color="dark" no-caps label="Ir a Semifinal Zona Andina"
           to="/semifinal-andina" />
       </div>
     </div>

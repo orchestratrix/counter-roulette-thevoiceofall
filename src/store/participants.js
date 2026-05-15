@@ -59,8 +59,8 @@ const initialParticipants = [
 export const useParticipantsStore = defineStore('participants', () => {
   const participants = ref(JSON.parse(JSON.stringify(initialParticipants)))
   const championId = ref(null)
-  const finalistNorteId = ref(null)
-  const finalistAndinaId = ref(null)
+  const finalistNorteId = ref('04')
+  const finalistAndinaId = ref('08')
 
   // Helpers internos
   const findById = (id) => participants.value.find(p => p.id === id)
@@ -186,7 +186,7 @@ export const useParticipantsStore = defineStore('participants', () => {
   }
 
   function clearFinalist(region) {
-    if (region.toLowerCase() === 'zona norte') finalistCaribeId.value = null
+    if (region.toLowerCase() === 'zona norte') finalistNorteId.value = null
     else if (region.toLowerCase() === 'zona andina') finalistAndinaId.value = null
     championId.value = null
   }
