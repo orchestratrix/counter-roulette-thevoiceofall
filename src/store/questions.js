@@ -4,108 +4,59 @@ import { ref, computed } from 'vue'
 const initialQuestions = [
     {
         id: 1,
-        category: 'GOBIERNO ESCOLAR',
-        icon: 'mdi-bullhorn',
-        formulation: 'En muchos colegios los estudiantes sienten que las decisiones importantes ya están tomadas antes de escuchar sus opiniones.',
-        question: '¿Qué cree que debería cambiar para que el gobierno escolar tenga una participación más real dentro de las instituciones?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-cellphone-off',
+        formulation: 'Cada vez más estudiantes pasan gran parte del tiempo usando el celular durante clases o actividades escolares.',
+        question: '¿Cómo abordarías esta situación sin que los estudiantes sientan que solo se les está prohibiendo o castigando?'
     },
     {
         id: 2,
-        category: 'GOBIERNO ESCOLAR',
-        icon: 'mdi-account-group',
-        formulation: 'A veces, después de las elecciones, algunos representantes estudiantiles pierden cercanía con quienes los eligieron y dejan de escuchar sus necesidades.',
-        question: '¿Qué cree que debería hacer un líder para mantenerse conectado con la comunidad que representa?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-heart-pulse',
+        formulation: 'Muchos estudiantes sienten estrés por las tareas, exámenes y problemas personales.',
+        question: '¿Qué iniciativas propondrías para apoyar el bienestar emocional dentro del colegio?'
     },
     {
         id: 3,
-        category: 'GOBIERNO ESCOLAR',
-        icon: 'mdi-lightbulb-on',
-        formulation: 'En algunos colegios, los estudiantes sienten que las propuestas del gobierno escolar quedan solo en el papel y no generan cambios visibles.',
-        question: '¿Qué cree que hace falta para que las ideas realmente se conviertan en acciones dentro de una institución?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-palette',
+        formulation: 'Hay compañeros que tienen talento para el deporte, el arte o la música, pero sienten que esas habilidades son relegadas a un segundo nivel de importancia en la institución.',
+        question: '¿Qué harías para darles más espacio y reconocimiento?'
     },
     {
         id: 4,
-        category: 'GOBIERNO ESCOLAR',
-        icon: 'mdi-target',
-        formulation: 'Hay ocasiones donde los representantes estudiantiles terminan enfocándose más en actividades recreativas que en problemas importantes de la comunidad.',
-        question: '¿Cuál cree que debería ser la verdadera prioridad de un gobierno escolar?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-lightbulb-on',
+        formulation: 'Si pudieras cambiar una sola cosa de la vida estudiantil actual para mejorar el día a día de los jóvenes en los colegios.',
+        question: '¿Qué cambiarías y por qué?'
     },
     {
         id: 5,
-        category: 'GOBIERNO ESCOLAR',
-        icon: 'mdi-magnify',
-        formulation: 'En muchos procesos estudiantiles, las campañas se enfocan más en ganar popularidad que en discutir propuestas de fondo.',
-        question: '¿Qué cree que debería valorar realmente una comunidad al momento de elegir a sus representantes?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-ear-hearing',
+        formulation: 'Como personero estudiantil.',
+        question: '¿Cómo garantizas que las opiniones de todos los estudiantes sean escuchadas y tomadas en cuenta?'
     },
     {
         id: 6,
-        category: 'PARTICIPACIÓN ESTUDIANTIL',
-        icon: 'mdi-account-multiple-outline',
-        formulation: 'En la mayoría de procesos escolares siempre participan los mismos estudiantes, mientras muchos otros prefieren quedarse al margen.',
-        question: '¿Por qué cree que sucede eso y cómo podría cambiarse esa realidad dentro de los colegios?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-handshake',
+        formulation: 'Si en tu colegio hay un problema de convivencia entre la comunidad estudiantil.',
+        question: '¿Qué propondrías para mejorar el bienestar común?'
     },
     {
         id: 7,
-        category: 'PARTICIPACIÓN ESTUDIANTIL',
-        icon: 'mdi-cellphone',
-        formulation: 'Actualmente muchos jóvenes expresan sus opiniones en redes sociales, pero participan poco en espacios de discusión dentro de sus instituciones.',
-        question: '¿Qué cree que hace falta para que los estudiantes vuelvan a involucrarse más en este tipo de escenarios?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-shield-account',
+        formulation: 'En tu colegio comienza a presentarse un caso de bullying y discriminación contra un estudiante, mientras muchos compañeros prefieren quedarse callados por miedo o indiferencia.',
+        question: '¿Cómo actuarías frente a esta situación y qué propondrías para evitar que vuelva a repetirse dentro de la comunidad educativa?'
     },
     {
         id: 8,
-        category: 'PARTICIPACIÓN ESTUDIANTIL',
-        icon: 'mdi-handshake',
-        formulation: 'Muchos estudiantes sienten que participar no vale la pena porque las decisiones importantes terminan dependiendo de los adultos.',
-        question: '¿Cómo cree que se puede fortalecer la confianza de los jóvenes en estos espacios de participación?'
-    },
-    {
-        id: 9,
-        category: 'PARTICIPACIÓN ESTUDIANTIL',
-        icon: 'mdi-calendar-check',
-        formulation: 'En algunos colegios, los estudiantes solo se interesan por estos procesos cuando hay campañas o elecciones.',
-        question: '¿Cómo cree que se podría mantener una participación activa durante todo el año y no solo en época electoral?'
-    },
-    {
-        id: 10,
-        category: 'PARTICIPACIÓN ESTUDIANTIL',
-        icon: 'mdi-message-text',
-        formulation: 'Hay jóvenes que tienen buenas ideas, pero no participan porque sienten miedo a ser juzgados o ignorados por los demás.',
-        question: '¿Qué cree que debería cambiar dentro de los colegios para que más estudiantes se animen a expresar lo que piensan?'
-    },
-    {
-        id: 11,
-        category: 'ÉTICA',
-        icon: 'mdi-scale-balance',
-        formulation: 'En ocasiones, algunos líderes hacen promesas muy populares durante campaña aun sabiendo que serán difíciles de cumplir.',
-        question: '¿Qué cree que demuestra realmente la ética de una persona cuando asume una posición de liderazgo?'
-    },
-    {
-        id: 12,
-        category: 'ÉTICA',
-        icon: 'mdi-gavel',
-        formulation: 'Muchas veces un líder debe tomar decisiones que pueden beneficiar a unos estudiantes y afectar a otros.',
-        question: '¿Cómo cree que una persona debe actuar cuando tiene la responsabilidad de decidir por toda una comunidad?'
-    },
-    {
-        id: 13,
-        category: 'ÉTICA',
-        icon: 'mdi-shield-account',
-        formulation: 'En algunos casos, los líderes reciben presión de sus amigos, compañeros o grupos cercanos para tomar ciertas decisiones.',
-        question: '¿Cómo cree que una persona puede mantener su criterio y actuar correctamente en medio de esa presión?'
-    },
-    {
-        id: 14,
-        category: 'ÉTICA',
-        icon: 'mdi-microphone',
-        formulation: 'Muchas veces las personas apoyan a quien habla mejor o tiene más carisma, incluso por encima de quienes tienen propuestas más sólidas.',
-        question: '¿Qué cree que dice eso sobre la manera en que elegimos a nuestros líderes?'
-    },
-    {
-        id: 15,
-        category: 'ÉTICA',
-        icon: 'mdi-account-heart',
-        formulation: 'Hay decisiones que pueden ser populares para la mayoría, pero injustas para un grupo pequeño de personas.',
-        question: '¿Qué responsabilidad tiene un líder cuando debe tomar decisiones que afectan de manera diferente a su comunidad?'
+        category: 'GRAN FINAL',
+        icon: 'mdi-school',
+        formulation: 'Se acerca el final del calendario escolar, y el índice de estudiantes que van perdiendo el año es muy alto.',
+        question: '¿Qué plan implementarías para mejorar la situación?'
     }
 ]
 

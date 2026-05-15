@@ -87,19 +87,9 @@ function resetAll() {
 
             <!-- Footer informativo -->
             <div class="view-footer">
-                <div class="category-legend">
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #E63946"></span>
-                        <span>Gobierno Escolar</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #0749BF"></span>
-                        <span>Participación Estudiantil</span>
-                    </div>
-                    <div class="legend-item">
-                        <span class="legend-dot" style="background: #FFCC29"></span>
-                        <span>Ética</span>
-                    </div>
+                <div class="final-badge">
+                    <q-icon name="mdi-trophy-variant" />
+                    <span>Gran Final · 8 preguntas decisivas</span>
                 </div>
             </div>
         </template>
@@ -243,35 +233,30 @@ function resetAll() {
 .view-footer {
     margin-top: 24px;
     padding: 16px;
-}
-
-.category-legend {
     display: flex;
     justify-content: center;
-    gap: 28px;
-    flex-wrap: wrap;
-    padding: 14px 20px;
-    background-color: rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    max-width: 720px;
-    margin: 0 auto;
 }
 
-.legend-item {
+.final-badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.85);
-    font-weight: 600;
+    gap: 12px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, rgba(255, 204, 41, 0.15), rgba(7, 73, 191, 0.15));
+    border: 1px solid rgba(255, 204, 41, 0.4);
+    border-radius: 999px;
+    color: #FFCC29;
+    font-weight: 800;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin: 0 auto;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 
-.legend-dot {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+.final-badge .q-icon {
+    font-size: 1.4rem;
+    color: #FFCC29;
 }
 
 .reset-dialog {

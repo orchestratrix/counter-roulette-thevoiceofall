@@ -55,7 +55,8 @@ const categoryClass = computed(() => {
     const map = {
         'GOBIERNO ESCOLAR': 'cat-gobierno',
         'PARTICIPACIÓN ESTUDIANTIL': 'cat-participacion',
-        'ÉTICA': 'cat-etica'
+        'ÉTICA': 'cat-etica',
+        'GRAN FINAL': 'cat-final'
     }
     return map[props.question.category] || ''
 })
@@ -93,6 +94,19 @@ const categoryClass = computed(() => {
 .card-header.cat-etica {
     background: linear-gradient(135deg, #FFCC29 0%, #e6b520 100%);
     color: #0A1F4D !important;
+}
+
+.card-header.cat-final {
+    background: linear-gradient(135deg, #FFCC29 0%, #E63946 50%, #0749BF 100%);
+    position: relative;
+}
+
+.card-header.cat-final::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.15) 0%, transparent 50%, rgba(0, 0, 0, 0.25) 100%);
+    pointer-events: none;
 }
 
 .card-header.cat-etica .category-label,
